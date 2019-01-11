@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,25 @@
     <title>Simple Calculator</title>
     <script src="calculator.js"></script>
     <script src="main.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="samplecalculator.css">
 </head>
-<body>
-    Sample Calculator
-    <input name="exp" type="text" placeholder="Put Expression e.g. 1+2" onchange="calculate(this.value)">
-    <div name="result"> 
-        Result:
-        <span id="result">0</span>
-    </div>
 
+<body class="body">
+    <div id="calc">
+        <h1 class="title"> Sample Calculator</h1>
+         
+        <input name="exp" type="text"
+            placeholder="Put Expression e.g. 1+2"
+            onchange="calculate(this.value)"
+            class="input"
+            title="calculator">
+            
+        <div name="result-container" class="result-container">
+            <div class="title"> Result:</div>
+            <span id="result" class="result">0</span>
+        </div>
+    </div>
 </body>
+
 </html>

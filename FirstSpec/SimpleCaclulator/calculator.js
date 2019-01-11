@@ -1,18 +1,24 @@
-function Calculator(){
-    this.total=0;
+function Calculator () {
+  this.total = 0
 }
 
-Calculator.prototype.add=function(number){
-    return this.total+=number;
+Calculator.prototype.add = function (number) {
+  var result = this.total += number
+  return result
 }
-Calculator.prototype.subtract=function(number){    
-    return this.total-=number;
+Calculator.prototype.subtract = function (number) {
+  var result = this.total -= number
+  return result
 }
-Calculator.prototype.multiply=function(number){
-    return this.total*=number;
+Calculator.prototype.multiply = function (number) {
+  var result = this.total *= number
+  return result
 }
-Calculator.prototype.divide=function(number){
-    if(number==0) {throw new Error('Cannot Divide by Zero');}
+Calculator.prototype.divide = function (number) {
+  if (number === 0) {
+    throw new Error('Cannot Divide by Zero')
+  }
 
-    return this.total/=number;
+  var result = this.total /= number
+  return result
 }
