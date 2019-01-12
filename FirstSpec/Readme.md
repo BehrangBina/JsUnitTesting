@@ -126,3 +126,8 @@ Methods can contain of
 
 We usually don't test the actual function. However if we need to do so we can use
 > .and.callTrough
+
+### Testing a function with different implementation
+
+A spy, when configured to fake a return value
+In case required to test the function with different implementation we use callFake()

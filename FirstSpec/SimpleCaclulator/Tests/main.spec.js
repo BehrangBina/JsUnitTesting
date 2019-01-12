@@ -67,11 +67,23 @@ describe('main.js', function () {
     })
   })
 
-  it('updateResult (example of actual method call via callThrough)', () => {
-    spyOn(window, 'updateResult')
-    const spy = spyOn(Calculator.prototype, 'multiply').and.callThrough()
-    calculate('5*12')
-    expect(spy).toHaveBeenCalled()
-    expect(window.updateResult).toHaveBeenCalledWith(60)
+  describe('Other Jasmine Test Cases - Example', () => {
+    it('updateResult (example of actual method call via callThrough)', () => {
+      spyOn(window, 'updateResult')
+      const spy = spyOn(Calculator.prototype, 'multiply').and.callThrough()
+      calculate('5*12')
+      expect(spy).toHaveBeenCalled()
+      expect(window.updateResult).toHaveBeenCalledWith(60)
+    })
+    it('updateResult (example of with different implementation with call fake)', () => {
+    // just an example -A spy, when configured to fake a return value
+      spyOn(window, 'updateResult')
+      const spy = spyOn(Calculator.prototype, 'multiply').and.callFake(function (number) {
+        return 'It Works'
+      })
+      calculate('5*12')
+      expect(spy).toHaveBeenCalled()
+      expect(window.updateResult).toHaveBeenCalledWith('It Works')
+    })
   })
 })
