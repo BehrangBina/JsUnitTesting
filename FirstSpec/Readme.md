@@ -121,3 +121,8 @@ Methods can contain of
 * toHaveBeenCalled()
 * toHaveBeenCalledWith()
 * toHaveBeenCalledTimes()
+
+### Testing The actual function
+
+We usually don't test the actual function. However if we need to do so we can use
+> .and.callTrough

@@ -33,8 +33,20 @@ describe('main.js', function () {
       expect(spy).not.toHaveBeenCalledWith(4) // main.js line 14 the function called only by the second number
       expect(spy).toHaveBeenCalledWith(2)
     })
-    xit('Calls Subtract', () => {})
-    xit('Calls Divided', () => {})
+    it('Calls Subtract', () => {
+      const spy = spyOn(Calculator.prototype, 'subtract')
+      calculate('14-12')
+      expect(spy).toHaveBeenCalled()
+      expect(spy).toHaveBeenCalledWith(12)
+      expect(spy).not.toHaveBeenCalledWith(14)
+    })
+    it('Calls Divided', () => {
+      const spy = spyOn(Calculator.prototype, 'divide')
+      calculate('14/7')
+      expect(spy).toHaveBeenCalled()
+      expect(spy).toHaveBeenCalledWith(7)
+      expect(spy).not.toHaveBeenCalledWith(14)
+    })
   })
 
   describe('updateResult()', () => {
@@ -53,5 +65,13 @@ describe('main.js', function () {
       updateResult('5')
       expect(element.innerText).toBe('5')
     })
+  })
+
+  it('updateResult (example of actual method call via callThrough)', () => {
+    spyOn(window, 'updateResult')
+    const spy = spyOn(Calculator.prototype, 'multiply').and.callThrough()
+    calculate('5*12')
+    expect(spy).toHaveBeenCalled()
+    expect(window.updateResult).toHaveBeenCalledWith(60)
   })
 })

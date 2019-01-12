@@ -9,7 +9,7 @@ function calculate (inputValue) {
   if (operation == null || Number.isNaN(numberA) || Number.isNaN(numberB)) {
     updateResult('Operation Is not Accpted')
     return
-    }
+  }
   const calc = new Calculator()
   calc.add(numberA)
   let result
@@ -17,16 +17,16 @@ function calculate (inputValue) {
     case '+':
       result = calc.add(numberB)
       break
-        case '-':
+    case '-':
       result = calc.subtract(numberB)
       break
-        case '*':
+    case '*':
       result = calc.multiply(numberB)
       break
-        case '/':
+    case '/':
       result = calc.divide(numberB)
       break
-    }
+  }
   updateResult(result)
 }
 function updateResult (result) {
