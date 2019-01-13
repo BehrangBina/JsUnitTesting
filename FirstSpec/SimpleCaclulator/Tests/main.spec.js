@@ -85,5 +85,12 @@ describe('main.js', function () {
       expect(spy).toHaveBeenCalled()
       expect(window.updateResult).toHaveBeenCalledWith('It Works')
     })
+    it('updateResult (example returnValues)', () => {
+      spyOn(window, 'updateResult')
+      spyOn(Calculator.prototype, 'add').and.returnValues(null, 'whatever [add] returns')
+      calculate('12+18')
+      expect(window.updateResult).toHaveBeenCalled()
+      expect(window.updateResult).toHaveBeenCalledWith('whatever [add] returns')
+    })
   })
 })

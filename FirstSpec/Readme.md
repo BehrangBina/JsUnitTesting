@@ -130,4 +130,10 @@ We usually don't test the actual function. However if we need to do so we can us
 ### Testing a function with different implementation
 
 A spy, when configured to fake a return value
-In case required to test the function with different implementation we use callFake()
+In case required to test the function with different implementation we use __callFake()__
+
+The same thing can be done by returnValue
+> const spy = spyOn(Calculator.prototype, 'multiply').and.returnValue('It Works')
+
+* .and.returnValues >  Value changes depending on the number of calls
+  * i.e. add method: it calls once but does not matter what returns, but when we call it second time with add method
