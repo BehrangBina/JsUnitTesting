@@ -22,3 +22,12 @@ Calculator.prototype.divide = function (number) {
   var result = this.total /= number
   return result
 }
+
+// define version property
+Object.defineProperty(Calculator.prototype, 'version', {
+  get: function () {
+    return '0.1'
+  },
+  enumerable: true,
+  configurable: true
+})

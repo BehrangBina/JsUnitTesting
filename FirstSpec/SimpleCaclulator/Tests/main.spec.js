@@ -66,7 +66,19 @@ describe('main.js', function () {
       expect(element.innerText).toBe('5')
     })
   })
-
+  describe('showVersion()' , ()=> {
+    it('Calls Calculator Version', ()=> {
+      // second approach instead of creating and disposing element using spy
+      spyOn(document, 'getElementById').and.returnValue({
+        innerText : null
+      })
+     // debugger
+     const spy =  spyOnProperty(Calculator.prototype, 'version', 'get')
+      showVersion()
+      // if we dont declare spy: Object.getOwnPropertyDescriptor(Calculator.prototype, 'version').get
+      expect(spy).toHaveBeenCalled()
+    })
+  })
   describe('Other Jasmine Test Cases - Example', () => {
     it('updateResult (example of actual method call via callThrough)', () => {
       spyOn(window, 'updateResult')
@@ -91,6 +103,10 @@ describe('main.js', function () {
       calculate('12+18')
       expect(window.updateResult).toHaveBeenCalled()
       expect(window.updateResult).toHaveBeenCalledWith('whatever [add] returns')
+    })
+    it('example Throw Error', () => {     
+      spyOn(Calculator.prototype, 'divide').and.throwError('some error')
+      expect(function() {calculate('14/0') }).toThrowError('some error')
     })
   })
 })
