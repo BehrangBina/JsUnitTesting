@@ -66,19 +66,30 @@ describe('main.js', function () {
       expect(element.innerText).toBe('5')
     })
   })
-  describe('showVersion()' , ()=> {
-    it('Calls Calculator Version', ()=> {
-      // second approach instead of creating and disposing element using spy
-      spyOn(document, 'getElementById').and.returnValue({
-        innerText : null
+  describe('showVersion()', () => {
+    it('Calls Calculator Version from remote URL', (done) => {
+      const calculator = new Calculator()
+      calculator.version.then(function (version) {
+        // this is async execution so dont have access to it > need to to wait callback by done
+        // declare done in the function and call it after async call
+        expect(version).toBe('0.2')
+        done()
       })
-     // debugger
-     const spy =  spyOnProperty(Calculator.prototype, 'version', 'get')
-      showVersion()
-      // if we dont declare spy: Object.getOwnPropertyDescriptor(Calculator.prototype, 'version').get
-      expect(spy).toHaveBeenCalled()
+    })
+    it('Calls Calculator Version from remote URL With True Unit Testing', (done) => {
+      spyOn(window, 'fetch').and.returnValue(Promise.resolve(
+        new Response('{"Version":"2.0"}')
+      ))
+      const calculator = new Calculator()
+      calculator.version.then(function (version) {
+        // this is async execution so dont have access to it > need to to wait callback by done
+        // declare done in the function and call it after async call
+        expect(version).toBe('2.0')
+        done()
+      })
     })
   })
+
   describe('Other Jasmine Test Cases - Example', () => {
     it('updateResult (example of actual method call via callThrough)', () => {
       spyOn(window, 'updateResult')
@@ -104,9 +115,9 @@ describe('main.js', function () {
       expect(window.updateResult).toHaveBeenCalled()
       expect(window.updateResult).toHaveBeenCalledWith('whatever [add] returns')
     })
-    it('example Throw Error', () => {     
+    it('example Throw Error', () => {
       spyOn(Calculator.prototype, 'divide').and.throwError('some error')
-      expect(function() {calculate('14/0') }).toThrowError('some error')
+      expect(function () { calculate('14/0') }).toThrowError('some error')
     })
   })
 })

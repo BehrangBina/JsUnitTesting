@@ -137,3 +137,57 @@ The same thing can be done by returnValue
 
 * .and.returnValues >  Value changes depending on the number of calls
   * i.e. add method: it calls once but does not matter what returns, but when we call it second time with add method
+
+## The Promise
+
+object represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.
+
+Funtion Getting the josn from remote url
+
+> Object.defineProperty(Calculator.prototype, 'version', {
+  get: function () {
+    const link = 'https://raw.githubusercontent.com/BehrangBina/JsUnitTesting/master/FirstSpec/SimpleCaclulator/version.json'
+    return fetch(link)
+      .then(function (result) {
+        if (!result.ok) {
+          debugger
+          return Promise.reject(result)
+        }
+        return result.json()
+      })
+      .then(function (json) {
+        //debugger
+        return json.Version
+      })
+    // return '0.1'
+  },
+  enumerable: true,
+  configurable: true
+})
+
+For showing
+> function showVersion () {
+  // debugger
+  const calculator = new Calculator()
+  const element = document.getElementById('version')
+  // element.innerText = calculator.version
+  calculator.version.then(function (version) {
+    //debugger
+    element.innerText = version
+  })
+}
+
+For Testing
+> it('Calls Calculator Version from remote URL With True Unit Testing', (done) => {
+      spyOn(window, 'fetch').and.returnValue(Promise.resolve(
+        new Response('{"Version":"2.0"}')
+      ))
+      const calculator = new Calculator()
+      calculator.version.then(function (version) {
+        // this is async execution so dont have access to it > need to to wait callback by done
+        // declare done in the function and call it after async call
+        expect(version).toBe('2.0')
+        done()
+      })
+    })
+  })

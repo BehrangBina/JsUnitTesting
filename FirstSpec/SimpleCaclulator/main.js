@@ -40,5 +40,9 @@ function showVersion () {
   // debugger
   const calculator = new Calculator()
   const element = document.getElementById('version')
-  element.innerText = calculator.version
+  // element.innerText = calculator.version
+  calculator.version.then(function (version) {
+    //debugger
+    element.innerText = version
+  })
 }

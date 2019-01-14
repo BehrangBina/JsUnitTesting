@@ -26,7 +26,20 @@ Calculator.prototype.divide = function (number) {
 // define version property
 Object.defineProperty(Calculator.prototype, 'version', {
   get: function () {
-    return '0.1'
+    const link = 'https://raw.githubusercontent.com/BehrangBina/JsUnitTesting/master/FirstSpec/SimpleCaclulator/version.json'
+    return fetch(link)
+      .then(function (result) {
+        if (!result.ok) {
+          debugger
+          return Promise.reject(result)
+        }
+        return result.json()
+      })
+      .then(function (json) {
+        //debugger
+        return json.Version
+      })
+    // return '0.1'
   },
   enumerable: true,
   configurable: true
